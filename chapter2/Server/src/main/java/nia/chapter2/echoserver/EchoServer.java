@@ -3,10 +3,14 @@ package nia.chapter2.echoserver;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import io.netty.util.AttributeKey;
 
 import java.net.InetSocketAddress;
 
@@ -23,10 +27,10 @@ public class EchoServer {
     }
 
     public static void main(String[] args)
-        throws Exception {
+            throws Exception {
         if (args.length != 1) {
             System.err.println("Usage: " + EchoServer.class.getSimpleName() +
-                " <port>"
+                    " <port>"
             );
             return;
         }
@@ -40,18 +44,22 @@ public class EchoServer {
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
-                .channel(NioServerSocketChannel.class)
-                .localAddress(new InetSocketAddress(port))
-                .childHandler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    public void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(serverHandler);
-                    }
-                });
+                    .channel(NioServerSocketChannel.class)
+                    .localAddress(new InetSocketAddress(port))
+                    .option(ChannelOption.SO_KEEPALIVE, Boolean.TRUE)
+                    .childOption(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+                    .attr(AttributeKey.newInstance("UserId"), "60293")
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        public void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(serverHandler);
+                        }
+                    });
 
             ChannelFuture f = b.bind().sync();
             System.out.println(EchoServer.class.getName() +
-                " started and listening for connections on " + f.channel().localAddress());
+                    " started and listening for connections on " + f.channel().localAddress());
             f.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();

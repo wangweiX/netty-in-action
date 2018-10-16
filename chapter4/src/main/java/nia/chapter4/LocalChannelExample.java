@@ -99,11 +99,6 @@ public class LocalChannelExample {
                 closeChannel(sc);
                 sc.closeFuture().sync();
 
-//                assertNull(String.format(
-//                        "Expected null, got channel '%s' for local address '%s'",
-//                        LocalChannelRegistry.get(TEST_ADDRESS), TEST_ADDRESS), LocalChannelRegistry.get(TEST_ADDRESS));
-
-
             } finally {
                 closeChannel(cc);
                 closeChannel(sc);

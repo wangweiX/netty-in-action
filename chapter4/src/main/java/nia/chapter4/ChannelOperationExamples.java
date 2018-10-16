@@ -53,6 +53,7 @@ public class ChannelOperationExamples {
                 channel.write(buf.duplicate());
             }
         };
+
         Executor executor = Executors.newCachedThreadPool();
 
         // write in one thread
