@@ -20,21 +20,21 @@ import java.net.InetSocketAddress;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class EchoServer {
+
     private final int port;
 
     public EchoServer(int port) {
         this.port = port;
     }
 
-    public static void main(String[] args)
-            throws Exception {
-        if (args.length != 1) {
-            System.err.println("Usage: " + EchoServer.class.getSimpleName() +
-                    " <port>"
-            );
-            return;
-        }
-        int port = Integer.parseInt(args[0]);
+    public static void main(String[] args) throws Exception {
+//        if (args.length != 1) {
+//            System.err.println("Usage: " + EchoServer.class.getSimpleName() +
+//                    " <port>"
+//            );
+//            return;
+//        }
+        int port = 8880;//Integer.parseInt(args[0]);
         new EchoServer(port).start();
     }
 

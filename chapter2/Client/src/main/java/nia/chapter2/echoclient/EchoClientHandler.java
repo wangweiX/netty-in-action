@@ -14,6 +14,7 @@ import io.netty.util.CharsetUtil;
  */
 @Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks!",

@@ -12,11 +12,10 @@ import io.netty.util.ReferenceCountUtil;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 @Sharable
-public class DiscardOutboundHandler
-    extends ChannelOutboundHandlerAdapter {
+public class DiscardOutboundHandler extends ChannelOutboundHandlerAdapter {
+
     @Override
-    public void write(ChannelHandlerContext ctx,
-        Object msg, ChannelPromise promise) {
+    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
         ReferenceCountUtil.release(msg);
         promise.setSuccess();
     }

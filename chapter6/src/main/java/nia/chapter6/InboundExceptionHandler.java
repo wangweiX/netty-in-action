@@ -9,9 +9,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author <a href="mailto:norman.maurer@gmail.com">Norman Maurer</a>
  */
 public class InboundExceptionHandler extends ChannelInboundHandlerAdapter {
+
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx,
-        Throwable cause) {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
     }
