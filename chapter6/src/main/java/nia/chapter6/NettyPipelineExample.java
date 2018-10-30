@@ -46,7 +46,7 @@ class InboundHandA extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("InboundHandA : " + msg);
+        System.out.println("InboundHandler A : " + msg);
         ctx.fireChannelRead(msg);
     }
 
@@ -56,7 +56,7 @@ class InboundHandB extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("InboundHandB : " + msg);
+        System.out.println("InboundHandler B : " + msg);
         ctx.fireChannelRead(msg);
     }
 
@@ -70,7 +70,7 @@ class InboundHandC extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("InboundHandC : " + msg);
+        System.out.println("InboundHandler C : " + msg);
         ctx.fireChannelRead(msg);
     }
 }
