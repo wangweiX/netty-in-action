@@ -26,9 +26,9 @@ public class NettyPipelineExample {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new InboundHandA());
-                        ch.pipeline().addLast(new InboundHandB());
-                        ch.pipeline().addLast(new InboundHandC());
+                        ch.pipeline().addLast(new InboundHandlerA());
+                        ch.pipeline().addLast(new InboundHandlerB());
+                        ch.pipeline().addLast(new InboundHandlerC());
                     }
                 });
         try {
@@ -42,7 +42,7 @@ public class NettyPipelineExample {
     }
 }
 
-class InboundHandA extends ChannelInboundHandlerAdapter {
+class InboundHandlerA extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -52,7 +52,7 @@ class InboundHandA extends ChannelInboundHandlerAdapter {
 
 }
 
-class InboundHandB extends ChannelInboundHandlerAdapter {
+class InboundHandlerB extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -66,7 +66,7 @@ class InboundHandB extends ChannelInboundHandlerAdapter {
     }
 }
 
-class InboundHandC extends ChannelInboundHandlerAdapter {
+class InboundHandlerC extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
