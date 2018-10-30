@@ -5,15 +5,13 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
 
 /**
  * @author wangwei
  */
-public class NettyPipelineExample {
+public class NettyPipelineInboundExample {
 
     public static void main(String[] args) {
         EventLoopGroup group = new NioEventLoopGroup(1);
@@ -22,7 +20,6 @@ public class NettyPipelineExample {
                 .channel(NioServerSocketChannel.class)
                 .localAddress(new InetSocketAddress(8888))
                 .childOption(ChannelOption.TCP_NODELAY, true)
-                .handler(new LoggingHandler(LogLevel.INFO))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
