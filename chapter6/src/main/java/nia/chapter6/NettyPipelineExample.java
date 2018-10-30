@@ -50,10 +50,6 @@ class InboundHandA extends ChannelInboundHandlerAdapter {
         ctx.fireChannelRead(msg);
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.channel().pipeline().fireChannelRead("Hello world");
-    }
 }
 
 class InboundHandB extends ChannelInboundHandlerAdapter {
@@ -62,6 +58,11 @@ class InboundHandB extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("InboundHandB : " + msg);
         ctx.fireChannelRead(msg);
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        ctx.channel().pipeline().fireChannelRead("Hello world");
     }
 }
 
