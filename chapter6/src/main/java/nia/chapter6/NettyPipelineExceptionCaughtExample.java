@@ -29,6 +29,7 @@ public class NettyPipelineExceptionCaughtExample {
                         ch.pipeline().addLast(new OutboundHandlerA());
                         ch.pipeline().addLast(new OutboundHandlerB());
                         ch.pipeline().addLast(new OutboundHandlerC());
+                        ch.pipeline().addLast(new ExceptionCaughtHandler());
                     }
                 });
         try {
@@ -102,6 +103,18 @@ public class NettyPipelineExceptionCaughtExample {
         }
     }
 
+    static class ExceptionCaughtHandler extends ChannelInboundHandlerAdapter {
+
+        @Override
+        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+            if (cause instanceof Exception) {
+                // TODO
+                System.out.println("Successfully caught exception ! ");
+            } else {
+                // TODO
+            }
+        }
+    }
 
 }
 
